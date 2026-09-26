@@ -8,7 +8,32 @@ import {
 
 import { auth } from "./firebase";
 
-export const API_BASE = "https://fraudlens-ai-f7rl.onrender.com/api/v1";
+// Dynamic API Base resolution:
+// - Uses VITE_API_URL if provided
+// - Uses same-origin '/api/v1' in AI Studio preview (*.run.app), localhost, or Render monolithic
+// - Uses remote Render backend 'https://fraudlens-ai-f7rl.onrender.com/api/v1' when deployed on Vercel (*.vercel.app)
+function getApiBase(): string {
+  if (import.meta.env.VITE_API_URL) {
+    const custom = (import.meta.env.VITE_API_URL as string).trim();
+    return custom.endsWith("/api/v1") ? custom : `${custom.replace(/\/+$/, "")}/api/v1`;
+  }
+
+  if (typeof window !== "undefined") {
+    const hostname = window.location.hostname;
+    if (
+      hostname === "localhost" ||
+      hostname === "127.0.0.1" ||
+      hostname.endsWith(".run.app") ||
+      hostname.endsWith(".onrender.com")
+    ) {
+      return "/api/v1";
+    }
+  }
+
+  return "https://fraudlens-ai-f7rl.onrender.com/api/v1";
+}
+
+export const API_BASE = getApiBase();
 
 const isDemoEmail = (email: string | null) => {
   if (!email) return true;

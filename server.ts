@@ -1,4 +1,4 @@
-import express from "express";
+﻿import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
 import { createServer as createViteServer } from "vite";
@@ -13,7 +13,89 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
+
+// Helper to determine if requesting origin is permitted
+function isOriginAllowed(origin: string | undefined): boolean {
+  if (!origin) return true; // Direct server-to-server, curl, health checks
+
+  const sanitized = origin.replace(/\/+$/, "");
+
+  // Explicit origins from environment variables (comma-separated or single)
+  const envOrigins = [
+    process.env.FRONTEND_URL,
+    process.env.CORS_ORIGIN,
+    process.env.CLIENT_URL,
+    process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined,
+  ].filter(Boolean) as string[];
+
+  const allowedOriginsList: string[] = [];
+  for (const envVal of envOrigins) {
+    envVal.split(",").forEach((item) => {
+      const trimmed = item.trim().replace(/\/+$/, "");
+      if (trimmed) allowedOriginsList.push(trimmed);
+    });
+  }
+
+  if (allowedOriginsList.includes(sanitized)) {
+    return true;
+  }
+
+  // Allow all Vercel deployment URLs (production & preview branches)
+  if (/^https:\/\/([a-zA-Z0-9_-]+\.)*vercel\.app$/.test(sanitized)) {
+    return true;
+  }
+
+  // Allow localhost & 127.0.0.1 development origins on any port
+  if (/^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(sanitized)) {
+    return true;
+  }
+
+  // Allow Render origins
+  if (/^https:\/\/([a-zA-Z0-9_-]+\.)*onrender\.com$/.test(sanitized)) {
+    return true;
+  }
+
+  // Allow AI Studio preview environment domains
+  if (/^https:\/\/([a-zA-Z0-9_-]+\.)*run\.app$/.test(sanitized)) {
+    return true;
+  }
+
+  return false;
+}
+
+// ---------------------------------------------------------------------------
+// CORS & PREFLIGHT OPTIONS MIDDLEWARE
+// ---------------------------------------------------------------------------
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+
+  if (origin && isOriginAllowed(origin)) {
+    // When credentials are used, Access-Control-Allow-Origin MUST match the specific origin, not "*"
+    res.setHeader("Access-Control-Allow-Origin", origin);
+    res.setHeader("Access-Control-Allow-Credentials", "true");
+  } else if (!origin) {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+  }
+
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, PATCH, DELETE, OPTIONS, HEAD"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization, Cache-Control, Pragma, X-CSRF-Token"
+  );
+  res.setHeader("Access-Control-Expose-Headers", "Content-Length, Content-Type");
+  res.setHeader("Access-Control-Max-Age", "86400"); // 24 hours preflight cache
+
+  // Immediately respond to preflight OPTIONS requests with 204 No Content
+  if (req.method === "OPTIONS") {
+    return res.status(204).end();
+  }
+
+  next();
+});
 
 // Increase payload limit for base64 visual evidence uploads
 app.use(express.json({ limit: "50mb" }));
@@ -46,13 +128,132 @@ function getGeminiClient(): GoogleGenAI | null {
 let mongoClient: MongoClient | null = null;
 let db: Db | null = null;
 
+// In-memory store fallback when MongoDB Atlas is unreachable or MONGODB_URI is not set
+const inMemoryStore: Record<string, any[]> = {
+  investigations: [],
+  transactions: [],
+  evidence: [],
+};
+
+function matchesFilter(item: any, filter?: any): boolean {
+  if (!filter || Object.keys(filter).length === 0) return true;
+  for (const [key, val] of Object.entries(filter)) {
+    if (key === "$or" && Array.isArray(val)) {
+      if (!val.some((subFilter) => matchesFilter(item, subFilter))) return false;
+      continue;
+    }
+    if (key === "$and" && Array.isArray(val)) {
+      if (!val.every((subFilter) => matchesFilter(item, subFilter))) return false;
+      continue;
+    }
+
+    let itemVal: any;
+    if (key.includes(".")) {
+      const parts = key.split(".");
+      itemVal = parts.reduce((acc, part) => acc?.[part], item);
+    } else {
+      itemVal = item[key];
+    }
+
+    if (val && typeof val === "object" && !Array.isArray(val)) {
+      if ("$in" in val && Array.isArray((val as any).$in)) {
+        if (!(val as any).$in.includes(itemVal)) return false;
+        continue;
+      }
+      if ("$regex" in val) {
+        const regex = new RegExp((val as any).$regex, (val as any).$options || "i");
+        if (!regex.test(String(itemVal || ""))) return false;
+        continue;
+      }
+      if ("$ne" in val) {
+        if (itemVal === (val as any).$ne) return false;
+        continue;
+      }
+    }
+
+    if (itemVal !== val) return false;
+  }
+  return true;
+}
+
+function applySort(items: any[], sortObj?: any): any[] {
+  if (!sortObj) return items;
+  const sorted = [...items];
+  const [field, direction] = Object.entries(sortObj)[0] || [];
+  if (!field) return sorted;
+  const dir = direction === -1 ? -1 : 1;
+  sorted.sort((a, b) => {
+    const valA = a[field] ?? "";
+    const valB = b[field] ?? "";
+    if (valA < valB) return -1 * dir;
+    if (valA > valB) return 1 * dir;
+    return 0;
+  });
+  return sorted;
+}
+
+function getInMemoryCollection<T extends object>(name: string): any {
+  if (!inMemoryStore[name]) {
+    inMemoryStore[name] = [];
+  }
+  const store = inMemoryStore[name];
+
+  return {
+    find: (filter?: any) => {
+      let sortConfig: any = null;
+      return {
+        sort(sortObj: any) {
+          sortConfig = sortObj;
+          return this;
+        },
+        skip() { return this; },
+        limit() { return this; },
+        toArray: async () => {
+          const filtered = store.filter((item) => matchesFilter(item, filter));
+          return applySort(filtered, sortConfig) as T[];
+        },
+      };
+    },
+    findOne: async (filter?: any) => {
+      return (store.find((item) => matchesFilter(item, filter)) || null) as T | null;
+    },
+    findOneAndUpdate: async (filter: any, update: any, options?: any) => {
+      const idx = store.findIndex((item) => matchesFilter(item, filter));
+      if (idx === -1) return null;
+      const current = store[idx];
+      const updates = update?.$set ? { ...update.$set } : update;
+      const updated = { ...current, ...updates, updated_at: new Date().toISOString() };
+      store[idx] = updated;
+      return { value: updated };
+    },
+    insertOne: async (doc: any) => {
+      const newDoc = { ...doc, _id: doc.id || crypto.randomUUID() };
+      store.push(newDoc);
+      return { acknowledged: true, insertedId: newDoc._id };
+    },
+    insertMany: async (docs: any[]) => {
+      for (const d of docs) {
+        store.push({ ...d, _id: d.id || crypto.randomUUID() });
+      }
+      return { acknowledged: true, insertedCount: docs.length };
+    },
+    countDocuments: async (filter?: any) => {
+      return store.filter((item) => matchesFilter(item, filter)).length;
+    },
+    createIndex: async () => "index",
+  };
+}
+
 function getDb(): Db {
   if (!db) throw new Error("Database not connected");
   return db;
 }
 
 function col<T extends object>(name: string): Collection<T> {
-  return getDb().collection<T>(name);
+  if (db) {
+    return db.collection<T>(name);
+  }
+  return getInMemoryCollection<T>(name) as unknown as Collection<T>;
 }
 
 async function connectMongo(): Promise<void> {
@@ -102,14 +303,14 @@ export interface SuspiciousRegion {
   id: string;
   box: BoundingBox;
   type:
-    | "FONT_INCONSISTENCY"
-    | "BASELINE_MISALIGNMENT"
-    | "COMPRESSION_MISMATCH"
-    | "BACKGROUND_SPLICE"
-    | "CLONED_PATCH"
-    | "EDGE_HALO"
-    | "AMOUNT_ALTERATION"
-    | "METADATA_DISCREPANCY";
+  | "FONT_INCONSISTENCY"
+  | "BASELINE_MISALIGNMENT"
+  | "COMPRESSION_MISMATCH"
+  | "BACKGROUND_SPLICE"
+  | "CLONED_PATCH"
+  | "EDGE_HALO"
+  | "AMOUNT_ALTERATION"
+  | "METADATA_DISCREPANCY";
   severity: "HIGH" | "MEDIUM" | "LOW";
   label: string;
   description: string;
@@ -1227,6 +1428,15 @@ const SEED_INVESTIGATIONS: InvestigationRecord[] = [
   },
 ];
 
+function initInMemoryStore(): void {
+  inMemoryStore.investigations = JSON.parse(JSON.stringify(SEED_INVESTIGATIONS));
+  inMemoryStore.transactions = JSON.parse(JSON.stringify(SEED_TRANSACTIONS));
+  inMemoryStore.evidence = JSON.parse(JSON.stringify(SEED_EVIDENCE_ITEMS));
+}
+
+// Pre-populate in-memory store so it is ready immediately as fallback
+initInMemoryStore();
+
 // Data is now persisted in MongoDB â€” see connectMongo() and col() helper above.
 
 // ---------------------------------------------------------------------------
@@ -1256,9 +1466,9 @@ function assessImageQuality(dataUrl: string, fileSizeBytes: number): QualityAsse
 
   const score = Math.round(
     (resolution === "GOOD" ? 30 : resolution === "ACCEPTABLE" ? 20 : 10) +
-      (sharpness === "SHARP" ? 30 : sharpness === "MODERATE" ? 20 : 10) +
-      (lighting === "UNIFORM" ? 20 : lighting === "UNEVEN" ? 15 : 8) +
-      (perspective === "CORRECTED" ? 20 : 10)
+    (sharpness === "SHARP" ? 30 : sharpness === "MODERATE" ? 20 : 10) +
+    (lighting === "UNIFORM" ? 20 : lighting === "UNEVEN" ? 15 : 8) +
+    (perspective === "CORRECTED" ? 20 : 10)
   );
 
   return {
@@ -1885,50 +2095,50 @@ app.get("/api/v1/analytics", async (req, res) => {
       },
       inconsistency_types: isFiltered
         ? (userEvidence.length === 0 && sourceDb.length === 0 ? [] : [
-            { name: "Amount Divergence (Ledger vs OCR)", count: reviewCases, percentage: totalCases ? Math.round((reviewCases / totalCases) * 100) : 0, color: "#EF4444" },
-            { name: "Visual Font & Splice Inconsistency", count: userTamperedCount, percentage: userEvidence.length ? Math.round((userTamperedCount / userEvidence.length) * 100) : 0, color: "#F97316" },
-          ].filter(x => x.count > 0))
+          { name: "Amount Divergence (Ledger vs OCR)", count: reviewCases, percentage: totalCases ? Math.round((reviewCases / totalCases) * 100) : 0, color: "#EF4444" },
+          { name: "Visual Font & Splice Inconsistency", count: userTamperedCount, percentage: userEvidence.length ? Math.round((userTamperedCount / userEvidence.length) * 100) : 0, color: "#F97316" },
+        ].filter(x => x.count > 0))
         : [
-            { name: "Amount Divergence (Ledger vs OCR)", count: 92, percentage: 38, color: "#EF4444" },
-            { name: "Visual Font & Splice Inconsistency", count: 54, percentage: 22, color: "#F97316" },
-            { name: "Timestamp Chronology Inversion", count: 41, percentage: 17, color: "#8B5CF6" },
-            { name: "Merchant Alias Mismatch", count: 32, percentage: 13, color: "#EC4899" },
-            { name: "Duplicate Reused Document", count: 24, percentage: 10, color: "#06B6D4" },
-          ],
+          { name: "Amount Divergence (Ledger vs OCR)", count: 92, percentage: 38, color: "#EF4444" },
+          { name: "Visual Font & Splice Inconsistency", count: 54, percentage: 22, color: "#F97316" },
+          { name: "Timestamp Chronology Inversion", count: 41, percentage: 17, color: "#8B5CF6" },
+          { name: "Merchant Alias Mismatch", count: 32, percentage: 13, color: "#EC4899" },
+          { name: "Duplicate Reused Document", count: 24, percentage: 10, color: "#06B6D4" },
+        ],
       document_distribution: isFiltered
         ? (userEvidence.length === 0 ? [] : [
-            { type: "Payment Receipts", count: userEvidence.filter(e => e.document_type === "RECEIPT").length, percentage: Math.round((userEvidence.filter(e => e.document_type === "RECEIPT").length / userEvidence.length) * 100) },
-            { type: "Tax Invoices", count: userEvidence.filter(e => e.document_type === "INVOICE").length, percentage: Math.round((userEvidence.filter(e => e.document_type === "INVOICE").length / userEvidence.length) * 100) },
-            { type: "Payment Screenshots", count: userEvidence.filter(e => e.document_type === "PAYMENT_SCREENSHOT").length, percentage: Math.round((userEvidence.filter(e => e.document_type === "PAYMENT_SCREENSHOT").length / userEvidence.length) * 100) },
-            { type: "POS Terminal Slips", count: userEvidence.filter(e => e.document_type === "POS_SLIP").length, percentage: Math.round((userEvidence.filter(e => e.document_type === "POS_SLIP").length / userEvidence.length) * 100) },
-            { type: "Bank Statements", count: userEvidence.filter(e => e.document_type === "BANK_STATEMENT").length, percentage: Math.round((userEvidence.filter(e => e.document_type === "BANK_STATEMENT").length / userEvidence.length) * 100) },
-          ].filter(x => x.count > 0))
+          { type: "Payment Receipts", count: userEvidence.filter(e => e.document_type === "RECEIPT").length, percentage: Math.round((userEvidence.filter(e => e.document_type === "RECEIPT").length / userEvidence.length) * 100) },
+          { type: "Tax Invoices", count: userEvidence.filter(e => e.document_type === "INVOICE").length, percentage: Math.round((userEvidence.filter(e => e.document_type === "INVOICE").length / userEvidence.length) * 100) },
+          { type: "Payment Screenshots", count: userEvidence.filter(e => e.document_type === "PAYMENT_SCREENSHOT").length, percentage: Math.round((userEvidence.filter(e => e.document_type === "PAYMENT_SCREENSHOT").length / userEvidence.length) * 100) },
+          { type: "POS Terminal Slips", count: userEvidence.filter(e => e.document_type === "POS_SLIP").length, percentage: Math.round((userEvidence.filter(e => e.document_type === "POS_SLIP").length / userEvidence.length) * 100) },
+          { type: "Bank Statements", count: userEvidence.filter(e => e.document_type === "BANK_STATEMENT").length, percentage: Math.round((userEvidence.filter(e => e.document_type === "BANK_STATEMENT").length / userEvidence.length) * 100) },
+        ].filter(x => x.count > 0))
         : [
-            { type: "Payment Receipts", count: 680, percentage: 48 },
-            { type: "Tax Invoices", count: 340, percentage: 24 },
-            { type: "Mobile Screenshots", count: 220, percentage: 15 },
-            { type: "POS Terminal Slips", count: 140, percentage: 10 },
-            { type: "Bank Statements", count: 40, percentage: 3 },
-          ],
+          { type: "Payment Receipts", count: 680, percentage: 48 },
+          { type: "Tax Invoices", count: 340, percentage: 24 },
+          { type: "Mobile Screenshots", count: 220, percentage: 15 },
+          { type: "POS Terminal Slips", count: 140, percentage: 10 },
+          { type: "Bank Statements", count: 40, percentage: 3 },
+        ],
       trend_data: isFiltered
         ? (sourceDb.length === 0 && userEvidence.length === 0 ? [] : [
-            { day: "Mon", clear: 0, suspicious: 0, tampered: 0 },
-            { day: "Tue", clear: 0, suspicious: 0, tampered: 0 },
-            { day: "Wed", clear: 0, suspicious: 0, tampered: 0 },
-            { day: "Thu", clear: Math.floor(clearCases * 0.2), suspicious: 0, tampered: 0 },
-            { day: "Fri", clear: Math.floor(clearCases * 0.5), suspicious: Math.floor(suspiciousCases * 0.5), tampered: Math.floor((userTamperedCount + reviewCases + suspiciousCases) * 0.5) },
-            { day: "Sat", clear: Math.floor(clearCases * 0.8), suspicious: Math.floor(suspiciousCases * 0.8), tampered: Math.floor((userTamperedCount + reviewCases + suspiciousCases) * 0.8) },
-            { day: "Today", clear: clearCases, suspicious: suspiciousCases, tampered: userTamperedCount + reviewCases + suspiciousCases },
-          ])
+          { day: "Mon", clear: 0, suspicious: 0, tampered: 0 },
+          { day: "Tue", clear: 0, suspicious: 0, tampered: 0 },
+          { day: "Wed", clear: 0, suspicious: 0, tampered: 0 },
+          { day: "Thu", clear: Math.floor(clearCases * 0.2), suspicious: 0, tampered: 0 },
+          { day: "Fri", clear: Math.floor(clearCases * 0.5), suspicious: Math.floor(suspiciousCases * 0.5), tampered: Math.floor((userTamperedCount + reviewCases + suspiciousCases) * 0.5) },
+          { day: "Sat", clear: Math.floor(clearCases * 0.8), suspicious: Math.floor(suspiciousCases * 0.8), tampered: Math.floor((userTamperedCount + reviewCases + suspiciousCases) * 0.8) },
+          { day: "Today", clear: clearCases, suspicious: suspiciousCases, tampered: userTamperedCount + reviewCases + suspiciousCases },
+        ])
         : [
-            { day: "Mon", clear: 18, suspicious: 4, tampered: 2 },
-            { day: "Tue", clear: 24, suspicious: 5, tampered: 3 },
-            { day: "Wed", clear: 29, suspicious: 7, tampered: 4 },
-            { day: "Thu", clear: 32, suspicious: 6, tampered: 2 },
-            { day: "Fri", clear: 28, suspicious: 9, tampered: 5 },
-            { day: "Sat", clear: 15, suspicious: 3, tampered: 1 },
-            { day: "Sun", clear: 21, suspicious: 5, tampered: 3 },
-          ],
+          { day: "Mon", clear: 18, suspicious: 4, tampered: 2 },
+          { day: "Tue", clear: 24, suspicious: 5, tampered: 3 },
+          { day: "Wed", clear: 29, suspicious: 7, tampered: 4 },
+          { day: "Thu", clear: 32, suspicious: 6, tampered: 2 },
+          { day: "Fri", clear: 28, suspicious: 9, tampered: 5 },
+          { day: "Sat", clear: 15, suspicious: 3, tampered: 1 },
+          { day: "Sun", clear: 21, suspicious: 5, tampered: 3 },
+        ],
     });
   } catch (error: any) {
     res.status(500).json({ error: error.message });
@@ -1987,8 +2197,9 @@ async function startServer() {
     await connectMongo();
     await seedDatabase();
   } catch (err: any) {
-    console.error("[MongoDB] FATAL: Could not connect to MongoDB:", err.message);
-    console.error("[MongoDB] Server will start but all DB operations will fail. Check MONGODB_URI.");
+    console.error("[MongoDB] Notice: Could not connect to MongoDB:", err.message);
+    console.log("[MongoDB] Running in-memory database fallback pre-seeded with 5 demo investigations.");
+    initInMemoryStore();
   }
 
   // 2. Set up Express middleware / SPA
