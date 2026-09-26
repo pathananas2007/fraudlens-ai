@@ -9,6 +9,7 @@ import {
 import { auth } from "./firebase";
 
 export const API_BASE = "https://fraudlens-ai-f7rl.onrender.com/api/v1";
+
 const isDemoEmail = (email: string | null) => {
   if (!email) return true;
   return (
@@ -26,7 +27,7 @@ const getUserEmail = () => {
       const user = JSON.parse(data);
       return user.email;
     }
-  } catch(e) {}
+  } catch (e) { }
   return null;
 };
 
@@ -48,7 +49,7 @@ export async function fetchInvestigations(params?: {
   if (params?.status) query.set("status", params.status);
   if (params?.severity) query.set("severity", params.severity);
   if (params?.search) query.set("search", params.search);
-  
+
   const email = getUserEmail();
   if (email && !isDemoEmail(email)) {
     query.set("investigator", email);
