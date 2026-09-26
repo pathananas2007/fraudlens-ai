@@ -8,8 +8,7 @@ import {
 
 import { auth } from "./firebase";
 
-export const API_BASE = "/api/v1";
-
+export const API_BASE = "https://fraudlens-ai-f7rl.onrender.com/api/v1";
 const isDemoEmail = (email: string | null) => {
   if (!email) return true;
   return (
