@@ -1,0 +1,7 @@
+node_modules
+dist
+.git
+.gitignore
+README.md
+# We do NOT ignore .env here, because Vite needs the VITE_ prefixed variables during 'npm run build' inside the Docker builder stage.
+# The .env file is safely left behind in the builder stage and is NOT included in the final production image.

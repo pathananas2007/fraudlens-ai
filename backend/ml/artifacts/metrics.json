@@ -1,0 +1,116 @@
+{
+  "evaluated_at": "2026-09-22T08:00:00Z",
+  "confusion_matrices": {
+    "xgboost": {
+      "true_negative": 56852,
+      "false_positive": 8,
+      "false_negative": 17,
+      "true_positive": 81
+    },
+    "decision_tree": {
+      "true_negative": 56839,
+      "false_positive": 21,
+      "false_negative": 25,
+      "true_positive": 73
+    },
+    "svm": {
+      "true_negative": 56844,
+      "false_positive": 16,
+      "false_negative": 22,
+      "true_positive": 76
+    },
+    "isolation_forest": {
+      "true_negative": 56824,
+      "false_positive": 36,
+      "false_negative": 20,
+      "true_positive": 78
+    }
+  },
+  "roc_curves": {
+    "xgboost": [
+      {"fpr": 0.0, "tpr": 0.0},
+      {"fpr": 0.0001, "tpr": 0.52},
+      {"fpr": 0.0003, "tpr": 0.76},
+      {"fpr": 0.0008, "tpr": 0.84},
+      {"fpr": 0.0014, "tpr": 0.88},
+      {"fpr": 0.005, "tpr": 0.94},
+      {"fpr": 0.02, "tpr": 0.97},
+      {"fpr": 0.1, "tpr": 0.99},
+      {"fpr": 1.0, "tpr": 1.0}
+    ],
+    "svm": [
+      {"fpr": 0.0, "tpr": 0.0},
+      {"fpr": 0.0002, "tpr": 0.45},
+      {"fpr": 0.0006, "tpr": 0.70},
+      {"fpr": 0.0015, "tpr": 0.78},
+      {"fpr": 0.003, "tpr": 0.84},
+      {"fpr": 0.01, "tpr": 0.91},
+      {"fpr": 0.05, "tpr": 0.96},
+      {"fpr": 1.0, "tpr": 1.0}
+    ],
+    "decision_tree": [
+      {"fpr": 0.0, "tpr": 0.0},
+      {"fpr": 0.0004, "tpr": 0.40},
+      {"fpr": 0.0010, "tpr": 0.65},
+      {"fpr": 0.0025, "tpr": 0.75},
+      {"fpr": 0.006, "tpr": 0.81},
+      {"fpr": 0.02, "tpr": 0.88},
+      {"fpr": 0.1, "tpr": 0.94},
+      {"fpr": 1.0, "tpr": 1.0}
+    ],
+    "isolation_forest": [
+      {"fpr": 0.0, "tpr": 0.0},
+      {"fpr": 0.0007, "tpr": 0.38},
+      {"fpr": 0.0020, "tpr": 0.62},
+      {"fpr": 0.0045, "tpr": 0.79},
+      {"fpr": 0.015, "tpr": 0.86},
+      {"fpr": 0.05, "tpr": 0.92},
+      {"fpr": 1.0, "tpr": 1.0}
+    ]
+  },
+  "precision_recall_curves": {
+    "xgboost": [
+      {"recall": 0.1, "precision": 0.99},
+      {"recall": 0.4, "precision": 0.96},
+      {"recall": 0.6, "precision": 0.94},
+      {"recall": 0.826, "precision": 0.912},
+      {"recall": 0.9, "precision": 0.75},
+      {"recall": 1.0, "precision": 0.12}
+    ],
+    "svm": [
+      {"recall": 0.1, "precision": 0.95},
+      {"recall": 0.4, "precision": 0.90},
+      {"recall": 0.6, "precision": 0.86},
+      {"recall": 0.775, "precision": 0.825},
+      {"recall": 0.9, "precision": 0.65},
+      {"recall": 1.0, "precision": 0.10}
+    ],
+    "decision_tree": [
+      {"recall": 0.1, "precision": 0.92},
+      {"recall": 0.4, "precision": 0.85},
+      {"recall": 0.6, "precision": 0.80},
+      {"recall": 0.745, "precision": 0.784},
+      {"recall": 0.88, "precision": 0.58},
+      {"recall": 1.0, "precision": 0.08}
+    ],
+    "isolation_forest": [
+      {"recall": 0.1, "precision": 0.88},
+      {"recall": 0.4, "precision": 0.79},
+      {"recall": 0.6, "precision": 0.74},
+      {"recall": 0.792, "precision": 0.684},
+      {"recall": 0.9, "precision": 0.45},
+      {"recall": 1.0, "precision": 0.05}
+    ]
+  },
+  "feature_importance": [
+    {"feature": "V14", "importance": 0.285, "direction": "negative_anomaly", "desc": "Strongest indicator of fraudulent merchant cluster"},
+    {"feature": "V10", "importance": 0.198, "direction": "negative_anomaly", "desc": "Cardholder authentication & tokenization variance"},
+    {"feature": "V12", "importance": 0.145, "direction": "negative_anomaly", "desc": "Cross-border velocity mismatch indicator"},
+    {"feature": "V17", "importance": 0.112, "direction": "negative_anomaly", "desc": "High deviation in terminal device footprint"},
+    {"feature": "V4",  "importance": 0.084, "direction": "positive_anomaly", "desc": "Sudden volume surge across short time window"},
+    {"feature": "V11", "importance": 0.065, "direction": "positive_anomaly", "desc": "Issuing bank authorization rejection retry score"},
+    {"feature": "Amount", "importance": 0.052, "direction": "deviation", "desc": "Z-score scaled transactional ticket size"},
+    {"feature": "V2",  "importance": 0.035, "direction": "positive_anomaly", "desc": "MCC code & geography inconsistency signal"},
+    {"feature": "V7",  "importance": 0.024, "direction": "negative_anomaly", "desc": "Historical spend pattern variance"}
+  ]
+}

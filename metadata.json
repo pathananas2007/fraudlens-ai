@@ -1,0 +1,6 @@
+{
+  "name": "FraudLens AI",
+  "description": "See the evidence. Detect the inconsistency. Investigate the fraud. Computer Vision-Powered Financial Evidence Forensics platform.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
