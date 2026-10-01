@@ -1,9 +1,8 @@
 # FraudLens AI — Multimodal AI Fraud Investigation Platform
+
 <div align="center">
 
-> An AI-powered fraud investigation platform that combines document intelligence, computer vision, OCR,
-> anomaly detection, transaction analysis, and AI-assisted investigation into a unified forensic workspace.
-
+> An AI-powered fraud investigation platform that combines document intelligence, computer vision, OCR, anomaly detection, transaction analysis, and AI-assisted investigation into a unified forensic workspace.
 
 ## 🔗 Live Demo
 
@@ -18,6 +17,9 @@
 [![ECR](https://img.shields.io/badge/Amazon%20ECR-CONTAINER%20REGISTRY-orange?style=for-the-badge&logo=amazonaws&logoColor=white)](https://aws.amazon.com/ecr/)
 [![Elastic Beanstalk](https://img.shields.io/badge/Elastic%20Beanstalk-PRODUCTION-orange?style=for-the-badge&logo=amazonaws&logoColor=white)](https://aws.amazon.com/elasticbeanstalk/)
 [![AWS SSM](https://img.shields.io/badge/AWS%20SSM-SECURE%20SECRETS-orange?style=for-the-badge&logo=amazonaws&logoColor=white)](https://aws.amazon.com/systems-manager/)
+[![IAM](https://img.shields.io/badge/AWS%20IAM-ACCESS%20CONTROL-orange?style=for-the-badge&logo=amazonaws&logoColor=white)](https://aws.amazon.com/iam/)
+[![EC2](https://img.shields.io/badge/Amazon%20EC2-COMPUTE-orange?style=for-the-badge&logo=amazonaws&logoColor=white)](https://aws.amazon.com/ec2/)
+[![ACM](https://img.shields.io/badge/AWS%20ACM-TLS%20CERTIFICATE-orange?style=for-the-badge&logo=amazonaws&logoColor=white)](https://aws.amazon.com/certificate-manager/)
 
 [![Docker](https://img.shields.io/badge/Docker-CONTAINERIZED-blue?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
 [![React](https://img.shields.io/badge/React-FRONTEND-blue?style=for-the-badge&logo=react&logoColor=white)](https://react.dev/)
