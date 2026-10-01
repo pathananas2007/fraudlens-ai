@@ -9,9 +9,9 @@ import {
 import { auth } from "./firebase";
 
 // Dynamic API Base resolution:
-// - Uses VITE_API_URL if provided
-// - Uses same-origin '/api/v1' in AI Studio preview (*.run.app), localhost, or Render monolithic
-// - Uses remote Render backend 'https://fraudlens-ai-f7rl.onrender.com/api/v1' when deployed on Vercel (*.vercel.app)
+// - Uses VITE_API_URL if provided (set to '/api/v1' for AWS/monolithic deployments)
+// - Uses same-origin '/api/v1' for localhost, AI Studio, Render, or AWS (*.cloudfront.net, *.elasticbeanstalk.com)
+// - Falls back to remote Render backend for Vercel split deployments
 function getApiBase(): string {
   if (import.meta.env.VITE_API_URL) {
     const custom = (import.meta.env.VITE_API_URL as string).trim();
@@ -24,7 +24,9 @@ function getApiBase(): string {
       hostname === "localhost" ||
       hostname === "127.0.0.1" ||
       hostname.endsWith(".run.app") ||
-      hostname.endsWith(".onrender.com")
+      hostname.endsWith(".onrender.com") ||
+      hostname.endsWith(".cloudfront.net") ||
+      hostname.endsWith(".elasticbeanstalk.com")
     ) {
       return "/api/v1";
     }

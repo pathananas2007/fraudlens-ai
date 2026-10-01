@@ -1,33 +1,45 @@
+# ─── Stage 1: Builder ───────────────────────────────────────────────────────
 FROM node:20-alpine AS builder
 
 WORKDIR /app
 
-# Copy package.json and install dependencies
 COPY package.json package-lock.json* ./
 RUN npm install
 
-# Copy all project files, including .env for Vite build-time variables (like Firebase keys)
 COPY . .
 
-# Build the Vite frontend and bundle the Express server
-# Vite bakes VITE_* variables into the static frontend assets here
+ARG VITE_FIREBASE_API_KEY
+ARG VITE_FIREBASE_AUTH_DOMAIN
+ARG VITE_FIREBASE_PROJECT_ID
+ARG VITE_FIREBASE_STORAGE_BUCKET
+ARG VITE_FIREBASE_MESSAGING_SENDER_ID
+ARG VITE_FIREBASE_APP_ID
+ARG VITE_API_URL
+
+ENV VITE_FIREBASE_API_KEY=$VITE_FIREBASE_API_KEY
+ENV VITE_FIREBASE_AUTH_DOMAIN=$VITE_FIREBASE_AUTH_DOMAIN
+ENV VITE_FIREBASE_PROJECT_ID=$VITE_FIREBASE_PROJECT_ID
+ENV VITE_FIREBASE_STORAGE_BUCKET=$VITE_FIREBASE_STORAGE_BUCKET
+ENV VITE_FIREBASE_MESSAGING_SENDER_ID=$VITE_FIREBASE_MESSAGING_SENDER_ID
+ENV VITE_FIREBASE_APP_ID=$VITE_FIREBASE_APP_ID
+ENV VITE_API_URL=$VITE_API_URL
+
 RUN npm run build
 
-# Stage 2: Production
+# Prune dev dependencies in-place (faster than a fresh install in stage 2)
+RUN npm prune --omit=dev
+
+# ─── Stage 2: Production runtime ────────────────────────────────────────────
 FROM node:20-alpine
 
 WORKDIR /app
 
-# Copy only the compiled output and package.json from builder
+# Copy pruned node_modules, dist, and package.json from builder
 COPY --from=builder /app/dist ./dist
-COPY package.json package-lock.json* ./
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/package.json ./package.json
 
-# Install only production dependencies (since esbuild used --packages=external)
-RUN npm install --omit=dev
-
-# Set runtime environment
 ENV NODE_ENV=production
 EXPOSE 3000
 
-# Start the Node.js server
-CMD ["npm", "start"]
+CMD ["node", "dist/server.js"]

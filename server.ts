@@ -61,6 +61,16 @@ function isOriginAllowed(origin: string | undefined): boolean {
     return true;
   }
 
+  // Allow AWS Elastic Beanstalk domains
+  if (/^https?:\/\/([a-zA-Z0-9_-]+\.)*elasticbeanstalk\.com$/.test(sanitized)) {
+    return true;
+  }
+
+  // Allow AWS CloudFront domains
+  if (/^https:\/\/([a-zA-Z0-9_-]+\.)*cloudfront\.net$/.test(sanitized)) {
+    return true;
+  }
+
   return false;
 }
 
@@ -1617,7 +1627,7 @@ Return JSON ONLY:
           while (attempt < 3) {
             try {
               response = await gemini.models.generateContent({
-                model: "gemini-3.8-flash",
+                model: process.env.GEMINI_MODEL || "gemini-3.8-flash",
                 contents: [
                   { inlineData: { mimeType, data: base64Data } },
                   { text: prompt },
@@ -1994,26 +2004,35 @@ Guidelines:
       try {
         let response;
         let attempt = 0;
-        while (attempt < 3) {
+        let rateLimited = false;
+        while (attempt < 4) {
           try {
-            response = await gemini.models.generateContent({ model: "gemini-3.8-flash", contents: prompt });
+            response = await gemini.models.generateContent({ model: process.env.GEMINI_MODEL || "gemini-3.8-flash", contents: prompt });
             break;
           } catch (err: any) {
             const status = err.status ?? err.statusCode;
-            if (status === 503 || status === 429) {
+            if (status === 429) {
               attempt++;
-              if (attempt >= 3) throw err;
-              await new Promise(r => setTimeout(r, 1000 * attempt));
+              if (attempt >= 4) { rateLimited = true; break; }
+              // Exponential backoff: 2s, 5s, 10s
+              const delay = [2000, 5000, 10000][attempt - 1] ?? 10000;
+              await new Promise(r => setTimeout(r, delay));
+            } else if (status === 503) {
+              attempt++;
+              if (attempt >= 4) throw err;
+              await new Promise(r => setTimeout(r, 2000 * attempt));
             } else {
               throw err;
             }
           }
         }
-        return res.json({ answer: response?.text || "Analysis complete, but the model returned an empty response.", timestamp: new Date().toISOString() });
+        // If rate limited after retries, fall through to local rule-based response below
+        if (!rateLimited) {
+          return res.json({ answer: response?.text || "Analysis complete, but the model returned an empty response.", timestamp: new Date().toISOString() });
+        }
       } catch (geminiError: any) {
         const status = geminiError.status ?? geminiError.statusCode;
         console.error("Gemini API Error Object:", JSON.stringify(geminiError, Object.getOwnPropertyNames(geminiError)));
-        if (status === 429) return res.status(429).json({ error: "Rate limit exceeded. Please try again in a few seconds." });
         if (status === 404) return res.status(502).json({ error: "AI model not found. The configured Gemini model is unavailable for this API key." });
         if (status >= 500) return res.status(502).json({ error: "AI provider is currently experiencing issues. Please try again." });
         if (!status) return res.status(503).json({ error: "Could not reach the AI service. Check network connectivity or try again shortly." });
