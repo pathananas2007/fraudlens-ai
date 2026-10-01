@@ -246,7 +246,7 @@ flowchart TD
 
 ### 7. AI-Assisted Investigation
 
-The available evidence and analytical results are provided to the AI investigation layer, which helps synthesize the investigation context into structured insights.
+The available evidence and analytical results are provided to the AI investigation layer, which helps synthesize investigation context into structured insights.
 
 ### 8. Human Review
 
