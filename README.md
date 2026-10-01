@@ -1,13 +1,28 @@
 # FraudLens AI — Multimodal Financial Evidence Forensics
 
 > An AI-powered fraud investigation platform that combines document intelligence, computer vision, OCR, anomaly detection, transaction analysis, and AI-assisted investigation into a unified forensic workspace.
+<div align="center">
+<br>
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-AWS%20CloudFront-orange?style=for-the-badge)](https://d21zw6n2b48e0s.cloudfront.net)
-[![AWS](https://img.shields.io/badge/AWS-Deployed-orange?style=for-the-badge&logo=amazon-aws)](https://aws.amazon.com/)
-[![Docker](https://img.shields.io/badge/Docker-Containerized-blue?style=for-the-badge&logo=docker)](https://www.docker.com/)
-[![Node.js](https://img.shields.io/badge/Node.js-Backend-green?style=for-the-badge&logo=node.js)](https://nodejs.org/)
-[![React](https://img.shields.io/badge/React-Frontend-blue?style=for-the-badge&logo=react)](https://react.dev/)
+[![Live Demo](https://img.shields.io/badge/LIVE%20DEMO-AWS%20CLOUDFRONT-orange?style=for-the-badge)](https://d21zw6n2b48e0s.cloudfront.net/)
+[![AWS](https://img.shields.io/badge/AWS-DEPLOYED-orange?style=for-the-badge&logo=amazonaws&logoColor=white)](https://aws.amazon.com/)
+[![Amazon S3](https://img.shields.io/badge/Amazon%20S3-STORAGE-orange?style=for-the-badge&logo=amazons3&logoColor=white)](https://aws.amazon.com/s3/)
+[![Docker](https://img.shields.io/badge/Docker-CONTAINERIZED-blue?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
+[![Node.js](https://img.shields.io/badge/Node.js-BACKEND-green?style=for-the-badge&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
+[![React](https://img.shields.io/badge/React-FRONTEND-blue?style=for-the-badge&logo=react&logoColor=white)](https://react.dev/)
 
+[![Python](https://img.shields.io/badge/Python-ML%20%26%20AI-yellow?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-ML%20SERVICES-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-DATABASE-green?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
+[![Firebase](https://img.shields.io/badge/Firebase-AUTH-orange?style=for-the-badge&logo=firebase&logoColor=white)](https://firebase.google.com/)
+[![Gemini](https://img.shields.io/badge/Google%20Gemini-AI%20ENGINE-blue?style=for-the-badge&logo=google&logoColor=white)](https://ai.google.dev/)
+
+[![ECR](https://img.shields.io/badge/Amazon%20ECR-CONTAINER%20REGISTRY-orange?style=for-the-badge&logo=amazonaws&logoColor=white)](https://aws.amazon.com/ecr/)
+[![Elastic Beanstalk](https://img.shields.io/badge/Elastic%20Beanstalk-PRODUCTION-orange?style=for-the-badge&logo=amazonaws&logoColor=white)](https://aws.amazon.com/elasticbeanstalk/)
+[![IAM](https://img.shields.io/badge/AWS%20IAM-SECURITY-orange?style=for-the-badge&logo=amazonaws&logoColor=white)](https://aws.amazon.com/iam/)
+[![SSM](https://img.shields.io/badge/AWS%20SSM-SECRETS-orange?style=for-the-badge&logo=amazonaws&logoColor=white)](https://aws.amazon.com/systems-manager/)
+
+</div>
 ---
 
 ## 🚀 Live Demo
