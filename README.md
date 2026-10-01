@@ -6,17 +6,29 @@
 
 FraudLens AI is a multimodal fraud investigation platform that brings financial documents, transaction data, computer vision, **OCR**, anomaly detection, and AI-assisted investigation into a single forensic workspace.
 
+
 <br>
 
-[![Live Demo](https://img.shields.io/badge/**LIVE**%**20DEMO**-**AWS**%**20CLOUDFRONT**-orange?style=for-the-badge)](https://d21zw6n2b48e0s.cloudfront.net/)
+[![Live Demo](https://img.shields.io/badge/LIVE%20DEMO-AWS%20CLOUDFRONT-orange?style=for-the-badge)](https://d21zw6n2b48e0s.cloudfront.net/)
 
 ### ☁️ AWS Infrastructure
 
-[![**AWS**](https://img.shields.io/badge/**AWS**-**CLOUD**%**20DEPLOYED**-orange?style=for-the-badge&logo=amazonaws&logoColor=white)](https://aws.amazon.com/) [![CloudFront](https://img.shields.io/badge/CloudFront-**HTTPS**%20%26%**20CDN**-orange?style=for-the-badge&logo=amazonaws&logoColor=white)](https://aws.amazon.com/cloudfront/) [![S3](https://img.shields.io/badge/Amazon%**20S3**-**STORAGE**-orange?style=for-the-badge&logo=amazonaws&logoColor=white)](https://aws.amazon.com/s3/) [![**ECR**](https://img.shields.io/badge/Amazon%**20ECR**-**CONTAINER**%**20REGISTRY**-orange?style=for-the-badge&logo=amazonaws&logoColor=white)](https://aws.amazon.com/ecr/) [![Elastic%20Beanstalk](https://img.shields.io/badge/Elastic%20Beanstalk-**PRODUCTION**-orange?style=for-the-badge&logo=amazonaws&logoColor=white)](https://aws.amazon.com/elasticbeanstalk/)
+[![AWS](https://img.shields.io/badge/AWS-CLOUD%20DEPLOYED-orange?style=for-the-badge&logo=amazonaws&logoColor=white)](https://aws.amazon.com/)
+[![CloudFront](https://img.shields.io/badge/CloudFront-HTTPS%20%26%20CDN-orange?style=for-the-badge&logo=amazonaws&logoColor=white)](https://aws.amazon.com/cloudfront/)
+[![S3](https://img.shields.io/badge/Amazon%20S3-STORAGE-orange?style=for-the-badge&logo=amazonaws&logoColor=white)](https://aws.amazon.com/s3/)
+[![ECR](https://img.shields.io/badge/Amazon%20ECR-CONTAINER%20REGISTRY-orange?style=for-the-badge&logo=amazonaws&logoColor=white)](https://aws.amazon.com/ecr/)
+[![Elastic%20Beanstalk](https://img.shields.io/badge/Elastic%20Beanstalk-PRODUCTION-orange?style=for-the-badge&logo=amazonaws&logoColor=white)](https://aws.amazon.com/elasticbeanstalk/)
 
 ### 🧠 Application Stack
 
-[![React](https://img.shields.io/badge/React-**FRONTEND**-blue?style=for-the-badge&logo=react&logoColor=white)](https://react.dev/) [![TypeScript](https://img.shields.io/badge/TypeScript-**TYPED**%**20UI**-blue?style=for-the-badge&logo=typescript&logoColor=white)](https://[www.typescriptlang.org/](https://www.typescriptlang.org/)) [![Node.js](https://img.shields.io/badge/Node.js-**BACKEND**-green?style=for-the-badge&logo=nodedotjs&logoColor=white)](https://nodejs.org/) [![Python](https://img.shields.io/badge/Python-ML%20%26%**20AI**-yellow?style=for-the-badge&logo=python&logoColor=white)](https://[www.python.org/](https://www.python.org/)) [![Docker](https://img.shields.io/badge/Docker-**CONTAINERIZED**-blue?style=for-the-badge&logo=docker&logoColor=white)](https://[www.docker.com/](https://www.docker.com/)) [![MongoDB](https://img.shields.io/badge/MongoDB-**DATABASE**-green?style=for-the-badge&logo=mongodb&logoColor=white)](https://[www.mongodb.com/](https://www.mongodb.com/)) [![Gemini](https://img.shields.io/badge/Gemini-**GENERATIVE**%**20AI**-blue?style=for-the-badge&logo=google&logoColor=white)](https://ai.google.dev/) [![Firebase](https://img.shields.io/badge/Firebase-**AUTHENTICATION**-orange?style=for-the-badge&logo=firebase&logoColor=white)](https://firebase.google.com/)
+[![React](https://img.shields.io/badge/React-FRONTEND-blue?style=for-the-badge&logo=react&logoColor=white)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-TYPED%20UI-blue?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-BACKEND-green?style=for-the-badge&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
+[![Python](https://img.shields.io/badge/Python-ML%20%26%20AI-yellow?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![Docker](https://img.shields.io/badge/Docker-CONTAINERIZED-blue?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-DATABASE-green?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
+[![Gemini](https://img.shields.io/badge/Gemini-GENERATIVE%20AI-blue?style=for-the-badge&logo=google&logoColor=white)](https://ai.google.dev/)
+[![Firebase](https://img.shields.io/badge/Firebase-AUTHENTICATION-orange?style=for-the-badge&logo=firebase&logoColor=white)](https://firebase.google.com/)
 
 </div>
 
@@ -63,7 +75,6 @@ Fraud detection traditionally focuses on structured transaction data.
 
 A transaction may be classified as:
 
-```text **NORMAL**
 
 or: **SUSPICIOUS**
 
