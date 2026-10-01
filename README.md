@@ -1,491 +1,513 @@
-# FraudLens AI
+# FraudLens AI — Multimodal Financial Evidence Forensics
 
-### Multimodal AI-Powered Fraud Investigation & Forensic Intelligence Platform
+> An AI-powered fraud investigation platform that combines document intelligence, computer vision, OCR, anomaly detection, transaction analysis, and AI-assisted investigation into a unified forensic workspace.
 
-FraudLens AI is a full-stack forensic investigation platform designed to help investigators analyze suspicious financial evidence, detect inconsistencies, investigate transactions, and generate AI-assisted forensic insights.
-
-The platform combines **computer vision, OCR, machine learning, MongoDB, and Gemini AI** into a unified investigation workspace.
-
----
-
-## 🚀 Features
-
-### 🔍 AI-Powered Investigation Copilot
-
-Ask natural-language questions about an investigation and receive AI-generated forensic analysis based on the available case evidence.
-
-Examples:
-
-- Explain key visual inconsistencies
-- Analyze merchant and amount divergence
-- Recommend immediate fraud mitigation steps
-- Summarize investigation findings
-- Analyze evidence relationships
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-AWS%20CloudFront-orange?style=for-the-badge)](https://d21zw6n2b48e0s.cloudfront.net)
+[![AWS](https://img.shields.io/badge/AWS-Deployed-orange?style=for-the-badge&logo=amazon-aws)](https://aws.amazon.com/)
+[![Docker](https://img.shields.io/badge/Docker-Containerized-blue?style=for-the-badge&logo=docker)](https://www.docker.com/)
+[![Node.js](https://img.shields.io/badge/Node.js-Backend-green?style=for-the-badge&logo=node.js)](https://nodejs.org/)
+[![React](https://img.shields.io/badge/React-Frontend-blue?style=for-the-badge&logo=react)](https://react.dev/)
 
 ---
 
-### 🖼️ Multimodal Evidence Analysis
+## 🚀 Live Demo
 
-Analyze financial documents and receipts using multiple forensic techniques:
+### Production Application
 
-- OCR extraction
-- Visual analysis
-- Layout analysis
-- Image inspection
-- Evidence metadata
-- Document comparison
-- Visual inconsistency detection
-- Tampering indicators
+**https://d21zw6n2b48e0s.cloudfront.net**
 
----
+FraudLens AI is deployed on AWS and publicly accessible through Amazon CloudFront.
 
-### 📊 Investigation Dashboard
+The production deployment provides:
 
-The executive dashboard provides a centralized overview of:
-
-- Evidence analyzed
-- Visual inconsistencies
-- Amount mismatches
-- Duplicate receipts
-- Investigation status
-- Risk indicators
-- Case activity
+- HTTPS access
+- React/Vite frontend
+- Node.js/Express backend
+- MongoDB Atlas connectivity
+- Gemini-powered AI investigation
+- Computer-vision forensic analysis
+- OCR processing
+- Evidence analysis workflows
 
 ---
 
-### 🗂️ Evidence Vault
+# 🧩 The Problem
 
-Centralized evidence management for investigation cases.
+Financial fraud investigations often involve fragmented evidence:
 
-Capabilities include:
-
-- Evidence upload
-- Evidence metadata
-- Evidence categorization
-- Evidence timeline
-- Forensic viewer
-- Investigation-linked evidence
-- Cross-evidence analysis
-
----
-
-### 🔬 Forensic Viewer
-
-Investigators can inspect evidence through multiple analysis views:
-
-- Normal view
-- Visual forensic analysis
-- OCR information
-- Layout information
-- Image characteristics
-- Evidence annotations
-
----
-
-### 🔗 Cross-Evidence Investigation
-
-Connect multiple pieces of evidence inside an investigation to identify relationships and inconsistencies.
-
----
-
-### 💳 Transaction Analysis
-
-Analyze transaction records and identify suspicious patterns involving:
-
+- Invoices
+- Receipts
+- Transaction records
+- Signatures
+- Identity documents
+- Images
 - Merchant information
-- Transaction amounts
-- Authorization data
-- Transaction status
-- Fraud indicators
+- Terminal records
+- Investigator notes
+
+Investigators may need to manually compare information across these sources to discover inconsistencies.
+
+FraudLens AI brings these evidence sources into a unified investigation workflow and uses AI-assisted analysis to surface relationships, anomalies, and potential inconsistencies.
 
 ---
 
-### 📑 Investigation Reports
+# 💡 The Solution
 
-Generate structured investigation reports containing relevant forensic findings and case information.
+**FraudLens AI** is a multimodal financial evidence forensics platform designed around an investigation-first workflow.
 
----
+Instead of treating every piece of evidence independently, the platform combines:
 
-## 🧠 Technology Stack
+```text
+Documents
+   +
+Images
+   +
+Transactions
+   +
+OCR
+   +
+Computer Vision
+   +
+Anomaly Detection
+   +
+AI Investigation
+        ↓
+Cross-Evidence Analysis
+        ↓
+Investigation Insights
 
-### Frontend
+The goal is to help investigators move from raw evidence to structured findings more efficiently.
+🔍 Core Capabilities
+1. Multimodal Evidence Analysis
+FraudLens AI works with multiple evidence types within the same investigation.
+Supported workflows include:
+- Document analysis
+- Image analysis
+- OCR extraction
+- Transaction analysis
+- Visual forensic analysis
+- Cross-evidence comparison
+- AI-assisted investigation
+2. Forensic Image Analysis
+The forensic analysis layer provides multiple visual-analysis techniques, including:
+- DCT quantization analysis
+- Font baseline analysis
+- Perceptual hashing
+- Edge analysis
+- Contrast analysis
+- Visual anomaly detection
+- Tampering indicators
+These techniques help identify suspicious visual inconsistencies within submitted evidence.
+3. OCR & Evidence Extraction
+OCR processing extracts information from uploaded evidence and makes it available for downstream investigation.
+Extracted information can be compared against:
+- Transaction records
+- Claimed invoice values
+- Merchant information
+- Other evidence
+- Investigation context
+4. Cross-Evidence Analysis
+Fraud investigations become more useful when evidence is compared rather than analyzed in isolation.
+FraudLens AI can examine discrepancies such as:
+Invoice Amount
+      │
+      ├──────────────┐
+      ▼              ▼
+Terminal Record   Transaction Data
+      │              │
+      └──────┬───────┘
+             ▼
+       Evidence Fusion
+             │
+             ▼
+       Investigation Finding
 
+Example investigation signals include:
+- Invoice amount vs. transaction amount
+- Evidence inconsistencies
+- Suspicious merchant categories
+- Altered signatures
+- PIN bypass indicators
+- Conflicting evidence fields
+🤖 AI Investigator
+FraudLens AI includes an AI-assisted investigation layer designed to help investigators interpret collected evidence.
+The AI Investigator can assist with:
+- Evidence interpretation
+- Investigation questions
+- Finding summaries
+- Cross-evidence reasoning
+- Forensic explanations
+- Investigation context
+The application integrates the Google Gemini API for AI-powered analysis.
+📊 Investigation Workspace
+The application provides a unified workspace for managing investigations.
+Key areas include:
+Executive Overview
+Provides high-level investigation information and relevant metrics.
+Forensic Viewer
+Provides multiple analysis views including:
+- Normal view
+- Heatmap/tamper overlays
+- OCR bounding boxes
+- Edge analysis
+- Contrast analysis
+Evidence Vault
+Central location for investigation evidence and documents.
+Investigation Workspace
+Allows investigators to work with evidence and compare findings.
+Cross-Evidence Matrix
+Provides a structured view for identifying relationships and inconsistencies across evidence.
+🧠 Machine Learning & Detection
+FraudLens AI combines multiple approaches rather than depending on a single classifier.
+Historical Baselines
+The project preserves:
+- Decision Tree
+- Support Vector Machine (SVM)
+as historical baseline models.
+Production-Oriented Detection
+The platform also uses:
+- XGBoost
+- Isolation Forest
+for supervised and unsupervised fraud/anomaly detection workflows.
+🏗️ System Architecture
+                         ┌─────────────────────┐
+                         │        User         │
+                         └──────────┬──────────┘
+                                    │
+                                  HTTPS
+                                    │
+                                    ▼
+                         ┌─────────────────────┐
+                         │  Amazon CloudFront  │
+                         │      CDN / HTTPS    │
+                         └──────────┬──────────┘
+                                    │
+                                    ▼
+                ┌────────────────────────────────────┐
+                │       AWS Elastic Beanstalk         │
+                │                                    │
+                │       Single EC2 + Docker           │
+                │                                    │
+                │  ┌────────────┐  ┌──────────────┐ │
+                │  │ React/Vite │  │ Node/Express │ │
+                │  │ Frontend   │  │ API Backend  │ │
+                │  └────────────┘  └───────┬──────┘ │
+                └──────────────────────────┼─────────┘
+                                           │
+                         ┌─────────────────┼─────────────────┐
+                         │                 │                 │
+                         ▼                 ▼                 ▼
+                 ┌─────────────┐   ┌─────────────┐  ┌──────────────┐
+                 │ MongoDB     │   │ Gemini API  │  │ Forensic     │
+                 │ Atlas       │   │             │  │ Analysis     │
+                 │             │   │ AI          │  │ OCR / CV     │
+                 └─────────────┘   └─────────────┘  └──────────────┘
+
+☁️ AWS Deployment Architecture
+FraudLens AI is deployed as a containerized application on AWS.
+                         Kiro
+                          │
+                          ▼
+                    Amazon ECR
+                          │
+                     Docker Image
+                          │
+                          ▼
+              Elastic Beanstalk
+                          │
+                          ▼
+                   EC2 Instance
+                    + Docker
+                          │
+                          ▼
+                  Amazon CloudFront
+                          │
+                          ▼
+                     Public HTTPS
+                          │
+                          ▼
+                       Users
+
+AWS Services Used
+AWS Service	Purpose
+Amazon CloudFront	Public HTTPS endpoint and content delivery
+Elastic Beanstalk	Application deployment and environment management
+Amazon EC2	Compute layer running the Docker application
+Amazon ECR	Container image registry
+Amazon S3	Elastic Beanstalk deployment/application artifacts
+AWS Systems Manager Parameter Store	Secure runtime secrets
+IAM	AWS resource permissions and deployment access
+
+
+🔐 Security & Secrets
+Production secrets are not committed to the Git repository.
+AWS Systems Manager Parameter Store is used for sensitive runtime configuration.
+Stored parameters include:
+/fraudlens-ai/GEMINI_API_KEY
+/fraudlens-ai/MONGODB_URI
+/fraudlens-ai/JWT_SECRET
+
+The parameters are stored as:
+SecureString
+
+This keeps sensitive credentials outside the source repository.
+🐳 Containerized Deployment
+FraudLens AI is packaged as a Docker application.
+The production container contains the unified application:
+React/Vite Frontend
+        +
+Node.js/Express Backend
+        +
+API Routes
+        +
+Forensic Application Logic
+
+The container image is stored in Amazon ECR and deployed through Elastic Beanstalk.
+🧑‍💻 Kiro-Assisted Development
+Kiro was used throughout the development and deployment workflow.
+The coding-agent workflow included:
+Requirements
+     │
+     ▼
+Codebase Analysis
+     │
+     ▼
+Architecture Planning
+     │
+     ▼
+Implementation
+     │
+     ▼
+Debugging
+     │
+     ▼
+Dockerization
+     │
+     ▼
+AWS Integration
+     │
+     ▼
+ECR Deployment
+     │
+     ▼
+Elastic Beanstalk
+     │
+     ▼
+CloudFront
+     │
+     ▼
+Live Application
+
+Kiro assisted with tasks including:
+- Project architecture analysis
+- Application changes
+- AWS CLI workflows
+- Docker configuration
+- ECR deployment
+- Elastic Beanstalk deployment
+- CloudFront configuration
+- Environment configuration
+- Deployment troubleshooting
+- Production verification
+The development process demonstrates an agent-assisted workflow from an existing application to a publicly deployed AWS application.
+🧪 Production Verification
+The deployed application was verified through the production CloudFront endpoint.
+Health endpoint:
+/api/v1/health
+
+The production health response confirmed:
+API: ONLINE
+MongoDB: CONNECTED
+Gemini AI: ONLINE
+Forensics Analyzer: ONLINE
+CV Engine: READY
+OCR Service: CONNECTED
+AI Investigator: ONLINE
+
+Production version:
+3.0.0-forensics-production
+
+🛠️ Technology Stack
+Frontend
 - React
-- TypeScript
 - Vite
+- TypeScript
 - Tailwind CSS
-- Recharts
 - Framer Motion
-
-### Backend
-
+- Recharts
+Backend
 - Node.js
 - Express
 - TypeScript
-- REST API
-
-### AI & Machine Learning
-
+AI / ML
 - Google Gemini API
-- Computer Vision
-- OCR
-- Layout Analysis
-- Decision Tree
-- Support Vector Machine
 - XGBoost
 - Isolation Forest
-
-### Database
-
+- Decision Tree
+- SVM
+- Computer Vision
+- OCR
+- Multimodal analysis
+Database
 - MongoDB Atlas
-- MongoDB Node.js Driver
-
-### Authentication
-
+Authentication
 - Firebase Authentication
-
-### Infrastructure
-
+- Google OAuth
+- Email/password authentication
+Infrastructure
 - Docker
-- Docker Compose
-- Vercel
-- Render
-- MongoDB Atlas
-
----
-
-# 🏗️ Architecture
-
-```text
-                    ┌──────────────────────┐
-                    │      FraudLens AI    │
-                    │      React + Vite    │
-                    └──────────┬───────────┘
-                               │
-                               │ REST API
-                               ▼
-                    ┌──────────────────────┐
-                    │   Node.js / Express  │
-                    │       Backend        │
-                    └──────┬───────┬───────┘
-                           │       │
-              ┌────────────┘       └─────────────┐
-              ▼                                  ▼
-     ┌─────────────────┐                ┌─────────────────┐
-     │  MongoDB Atlas  │                │   Gemini API    │
-     │                 │                │                 │
-     │ Investigations  │                │ AI Copilot      │
-     │ Evidence        │                │ AI Analysis     │
-     │ Transactions    │                │ Multimodal AI   │
-     │ Reports         │                └─────────────────┘
-     └─────────────────┘
-
-                           │
-                           ▼
-                 ┌────────────────────┐
-                 │ ML / Forensic      │
-                 │ Processing         │
-                 │                    │
-                 │ OCR                │
-                 │ Computer Vision    │
-                 │ Anomaly Detection │
-                 └────────────────────┘
-📁 Project Structure
+- Amazon ECR
+- Amazon Elastic Beanstalk
+- Amazon EC2
+- Amazon S3
+- Amazon CloudFront
+- AWS Systems Manager Parameter Store
+- AWS IAM
+📁 Project Architecture
+A simplified view of the project:
 fraudlens-ai/
-│
-├── backend/
-│   └── ml/
-│       ├── artifacts/
-│       ├── inference/
-│       ├── preprocessing/
-│       └── training/
-│
-├── public/
 │
 ├── src/
 │   ├── components/
-│   │   ├── auth/
-│   │   ├── common/
-│   │   ├── evidence/
-│   │   ├── investigation/
-│   │   └── layout/
-│   │
-│   ├── contexts/
-│   ├── lib/
 │   ├── pages/
-│   └── types/
+│   ├── lib/
+│   └── ...
 │
-├── notebooks/
+├── server/
+│   ├── routes/
+│   ├── services/
+│   └── ...
+│
+├── backend/
+│   └── ML / research code
+│
+├── public/
 │
 ├── Dockerfile
-├── docker-compose.yml
 ├── package.json
-├── package-lock.json
-├── server.ts
+├── vite.config.*
 ├── tsconfig.json
-├── vite.config.ts
+├── .env.example
 └── README.md
+
+The Python backend/ directory contains research and machine-learning code. The production web application currently runs through the Node.js/Express application.
+
 ⚙️ Local Development
 Prerequisites
-
-Make sure you have installed:
-
-Node.js 20+
-npm
-Git
-Docker Desktop (optional)
-MongoDB Atlas account
-Gemini API key
-Firebase project
-1. Clone the repository
-git clone https://github.com/pathananas2007/fraudlens-ai.git
-cd fraudlens-ai
-2. Install dependencies
+Install:
+- Node.js
+- npm
+- Docker
+- MongoDB Atlas account
+- Google Gemini API key
+- Firebase project
+Install Dependencies
 npm install
-🔐 Environment Variables
 
-Create a .env file in the project root.
-
+Environment Variables
+Create a local .env file.
+Example:
 GEMINI_API_KEY=your_gemini_api_key
+MONGODB_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+NODE_ENV=development
 
-MONGODB_URI=your_mongodb_atlas_connection_string
-
-JWT_SECRET=your_secure_jwt_secret
-
-For Firebase, configure the required client-side environment variables according to your Firebase configuration.
-
-⚠️ Security
-
-Never commit .env to GitHub.
-
-The repository intentionally ignores environment files.
-
-Use .env.example as the template:
-
-GEMINI_API_KEY=
-MONGODB_URI=
-JWT_SECRET=
-▶️ Run the Application
-Development mode
+Firebase client configuration is provided through the application's frontend environment configuration.
+Run Development Server
 npm run dev
 
-The Vite development server will start locally.
+🐳 Docker
+Build the application:
+docker build -t fraudlens-ai .
 
-Production build
-npm run build
+Run locally:
+docker run -p 3000:3000 fraudlens-ai
 
-Then start the backend:
-
-npm start
-
-The backend runs on:
-
-http://localhost:3000
-🐳 Run with Docker
-
-FraudLens AI can also be run using Docker.
-
-Make sure Docker Desktop is running.
-
-docker compose up --build
-
-Once the container starts:
-
+Then open:
 http://localhost:3000
 
-Check running containers:
-
-docker compose ps
-
-View application logs:
-
-docker compose logs app
-
-Stop the containers:
-
-docker compose down
-🍃 MongoDB Atlas
-
-FraudLens AI uses MongoDB Atlas for persistent application data.
-
-The application stores information such as:
-
-Investigations
-Evidence
-Transactions
-Reports
-Investigation metadata
-
-Set your Atlas connection string using:
-
-MONGODB_URI=your_mongodb_atlas_uri
-
-Example format:
-
-mongodb+srv://username:password@cluster.mongodb.net/fraudlens
-
-Do not expose the connection string publicly.
-
-🤖 Gemini AI
-
-Gemini powers the AI-assisted investigation capabilities.
-
-The API key is supplied through:
-
-GEMINI_API_KEY=your_key
-
-The backend handles Gemini communication so the API key does not need to be exposed to the browser.
-
-🔐 Authentication
-
-FraudLens AI uses Firebase Authentication for user authentication.
-
-Supported authentication workflows may include:
-
-Email/password authentication
-Google authentication
-Protected application routes
-
-Firebase configuration should be provided through the appropriate environment variables.
-
-📡 API
-
-The backend exposes REST APIs for major application modules.
-
-Examples:
-
-GET    /api/v1/health
-GET    /api/v1/investigations
-GET    /api/v1/evidence
-GET    /api/v1/transactions
-GET    /api/v1/reports
-GET    /api/v1/analytics
-
-POST   /api/v1/investigations
-POST   /api/v1/evidence/upload
-POST   /api/v1/investigations/:id/assistant
-
-Check the backend implementation for the complete API surface.
-
-🧪 Health Check
-
-Verify that the backend is running:
-
-curl http://localhost:3000/api/v1/health
-
-A healthy response should indicate that the API and required services are available.
-
-🚀 Deployment
-
-FraudLens AI is designed to be deployed using:
-
-Frontend → Vercel
-Backend  → Render
-Database → MongoDB Atlas
-AI       → Google Gemini API
-Production Architecture
-                    Internet
-                       │
-                       ▼
-              ┌─────────────────┐
-              │     Vercel      │
-              │ React Frontend  │
-              └────────┬────────┘
-                       │
-                       ▼
-              ┌─────────────────┐
-              │     Render      │
-              │ Node/Express API│
-              └───────┬─────┬───┘
-                      │     │
-              ┌───────┘     └────────┐
-              ▼                      ▼
-       ┌──────────────┐       ┌──────────────┐
-       │ MongoDB Atlas│       │ Gemini API   │
-       └──────────────┘       └──────────────┘
-🔄 Continuous Deployment
-
-Once Vercel and Render are connected to the GitHub repository, updates can be deployed automatically.
-
-Local Changes
+🚀 Production Deployment
+The production deployment follows:
+Source Code
      │
      ▼
-git add .
+Docker Build
      │
      ▼
-git commit
+Amazon ECR
      │
      ▼
-git push
+Elastic Beanstalk
      │
      ▼
-GitHub
+EC2
      │
-     ├──────────────► Vercel
+     ▼
+CloudFront
      │
-     └──────────────► Render
-                         │
-                         ▼
-                    Production
-🛡️ Security
+     ▼
+HTTPS Application
 
-FraudLens AI handles potentially sensitive investigation data.
+Runtime secrets are supplied through AWS Systems Manager Parameter Store rather than committed to source control.
+🔎 Why FraudLens AI?
+Traditional fraud analysis can require investigators to manually examine multiple evidence sources.
+FraudLens AI focuses on bringing those sources together into a single workflow:
+Collect Evidence
+      ↓
+Extract Information
+      ↓
+Analyze Visual Evidence
+      ↓
+Analyze Transactions
+      ↓
+Detect Anomalies
+      ↓
+Compare Evidence
+      ↓
+AI-Assisted Investigation
+      ↓
+Investigation Findings
 
-Recommended security practices:
+This makes the project more than a single fraud-classification model: it is a multimodal investigation platform.
+🎯 Project Direction
+Future development can extend FraudLens AI with:
+- More advanced multimodal models
+- Additional forensic detection techniques
+- Automated investigation reports
+- Larger evidence repositories
+- Advanced anomaly detection
+- Investigator collaboration
+- More cloud-native processing
+- Expanded MLOps workflows
+🌐 Links
+Live Application
+https://d21zw6n2b48e0s.cloudfront.net
+Repository
+https://github.com/pathananas2007/fraudlens-ai
+🏆 AWS Zero to Shipped
+FraudLens AI was developed and deployed as part of the AWS Zero to Shipped Hackathon.
+The project demonstrates the complete journey:
+IDEA
+ ↓
+BUILD
+ ↓
+AI-ASSISTED DEVELOPMENT
+ ↓
+CONTAINERIZATION
+ ↓
+AWS DEPLOYMENT
+ ↓
+CLOUDFRONT HTTPS
+ ↓
+LIVE APPLICATION
 
-Never commit API keys.
-Never commit .env.
-Use deployment-platform secrets.
-Use strong JWT secrets.
-Restrict MongoDB Atlas network access appropriately.
-Configure Firebase authorized domains.
-Validate uploaded files.
-Validate API requests.
-Use HTTPS in production.
-📈 Current Development Status
-Core Platform
- React frontend
- Node.js backend
- REST API
- MongoDB Atlas integration
- Docker support
- Authentication
- Investigation management
- Evidence management
- Transaction analysis
- Reports
- AI Investigation Copilot
- Forensic analysis interface
- ML components
-Performance Optimization
- Optimize analytics queries
- Optimize evidence queries
- Evidence pagination
- MongoDB query optimization
- Dashboard request deduplication
- Additional production performance tuning
-🧭 Roadmap
-Advanced multimodal forensic analysis
-Improved document tampering detection
-Advanced anomaly detection
-Investigation collaboration
-Evidence relationship graphs
-Automated forensic reports
-Advanced audit logging
-Production observability
-Performance optimization
-Scalable file/object storage
-⚠️ Disclaimer
+The project focuses on demonstrating how an AI-assisted development workflow can take a multimodal fraud investigation application from development to a publicly accessible production deployment.
+📄 License
+This project is provided for educational, research, and demonstration purposes.
+FraudLens AI
+Multimodal Financial Evidence Forensics
+Built with React, Node.js, Machine Learning, Computer Vision, Gemini, MongoDB, Docker, and AWS.
 
-FraudLens AI is a software project intended for investigation assistance and research purposes.
+**One correction before you paste it:** the README currently describes S3 as part of the **Elastic Beanstalk deployment/application-artifact path**, not as an evidence-storage system. That's intentional—we shouldn't claim S3 is storing fraud documents unless the code actually does that.
 
-AI-generated results and forensic indicators should be reviewed by qualified investigators and should not be treated as definitive proof of fraud without appropriate verification.
-
-👨‍💻 Author
-
-Anas Pathan
-
-AI & Data Science Engineering Student
-
-GitHub:
-https://github.com/pathananas2007
+Also, I kept the Python `backend/` distinction because your earlier architecture analysis established that it isn't currently wired into the running Node/Express production server.
