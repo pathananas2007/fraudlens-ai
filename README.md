@@ -1,36 +1,33 @@
-# FraudLens AI — Multimodal Financial Evidence Forensics
-
-> An AI-powered fraud investigation platform that combines document intelligence, computer vision, OCR, anomaly detection, transaction analysis, and AI-assisted investigation into a unified forensic workspace.
+# FraudLens AI — Multimodal AI Fraud Investigation Platform
 <div align="center">
+
+> An AI-powered fraud investigation platform that combines document intelligence, computer vision, OCR,
+> anomaly detection, transaction analysis, and AI-assisted investigation into a unified forensic workspace.
+
+
+## 🔗 Live Demo
+
+**Production Application**
+
 <br>
 
 [![Live Demo](https://img.shields.io/badge/LIVE%20DEMO-AWS%20CLOUDFRONT-orange?style=for-the-badge)](https://d21zw6n2b48e0s.cloudfront.net/)
 [![AWS](https://img.shields.io/badge/AWS-DEPLOYED-orange?style=for-the-badge&logo=amazonaws&logoColor=white)](https://aws.amazon.com/)
-[![Amazon S3](https://img.shields.io/badge/Amazon%20S3-STORAGE-orange?style=for-the-badge&logo=amazons3&logoColor=white)](https://aws.amazon.com/s3/)
-[![Docker](https://img.shields.io/badge/Docker-CONTAINERIZED-blue?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
-[![Node.js](https://img.shields.io/badge/Node.js-BACKEND-green?style=for-the-badge&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
-[![React](https://img.shields.io/badge/React-FRONTEND-blue?style=for-the-badge&logo=react&logoColor=white)](https://react.dev/)
-
-[![Python](https://img.shields.io/badge/Python-ML%20%26%20AI-yellow?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-ML%20SERVICES-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
-[![MongoDB](https://img.shields.io/badge/MongoDB-DATABASE-green?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
-[![Firebase](https://img.shields.io/badge/Firebase-AUTH-orange?style=for-the-badge&logo=firebase&logoColor=white)](https://firebase.google.com/)
-[![Gemini](https://img.shields.io/badge/Google%20Gemini-AI%20ENGINE-blue?style=for-the-badge&logo=google&logoColor=white)](https://ai.google.dev/)
-
+[![CloudFront](https://img.shields.io/badge/CloudFront-HTTPS-orange?style=for-the-badge&logo=amazonaws&logoColor=white)](https://aws.amazon.com/cloudfront/)
+[![S3](https://img.shields.io/badge/Amazon%20S3-STORAGE-orange?style=for-the-badge&logo=amazons3&logoColor=white)](https://aws.amazon.com/s3/)
 [![ECR](https://img.shields.io/badge/Amazon%20ECR-CONTAINER%20REGISTRY-orange?style=for-the-badge&logo=amazonaws&logoColor=white)](https://aws.amazon.com/ecr/)
 [![Elastic Beanstalk](https://img.shields.io/badge/Elastic%20Beanstalk-PRODUCTION-orange?style=for-the-badge&logo=amazonaws&logoColor=white)](https://aws.amazon.com/elasticbeanstalk/)
-[![IAM](https://img.shields.io/badge/AWS%20IAM-SECURITY-orange?style=for-the-badge&logo=amazonaws&logoColor=white)](https://aws.amazon.com/iam/)
-[![SSM](https://img.shields.io/badge/AWS%20SSM-SECRETS-orange?style=for-the-badge&logo=amazonaws&logoColor=white)](https://aws.amazon.com/systems-manager/)
+[![AWS SSM](https://img.shields.io/badge/AWS%20SSM-SECURE%20SECRETS-orange?style=for-the-badge&logo=amazonaws&logoColor=white)](https://aws.amazon.com/systems-manager/)
+
+[![Docker](https://img.shields.io/badge/Docker-CONTAINERIZED-blue?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
+[![React](https://img.shields.io/badge/React-FRONTEND-blue?style=for-the-badge&logo=react&logoColor=white)](https://react.dev/)
+[![Node.js](https://img.shields.io/badge/Node.js-BACKEND-green?style=for-the-badge&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
+[![Python](https://img.shields.io/badge/Python-ML%20%26%20AI-yellow?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-DATABASE-green?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
+[![Gemini](https://img.shields.io/badge/Gemini-AI%20ENGINE-blue?style=for-the-badge&logo=google&logoColor=white)](https://ai.google.dev/)
+[![Firebase](https://img.shields.io/badge/Firebase-AUTH-orange?style=for-the-badge&logo=firebase&logoColor=white)](https://firebase.google.com/)
 
 </div>
----
-
-## 🚀 Live Demo
-
-### Production Application
-
-**https://d21zw6n2b48e0s.cloudfront.net**
-
 FraudLens AI is deployed on AWS and publicly accessible through Amazon CloudFront.
 
 The production deployment provides:
@@ -46,7 +43,7 @@ The production deployment provides:
 
 ---
 
-# 🧩 The Problem
+## 🧩 The Problem
 
 Financial fraud investigations often involve fragmented evidence:
 
@@ -66,36 +63,30 @@ FraudLens AI brings these evidence sources into a unified investigation workflow
 
 ---
 
-# 💡 The Solution
+## 💡 The Solution
 
-**FraudLens AI** is a multimodal financial evidence forensics platform designed around an investigation-first workflow.
+FraudLens AI is a multimodal forensic evidence platform designed to support financial-fraud investigations.
 
 Instead of treating every piece of evidence independently, the platform combines:
 
-```text
-Documents
-   +
-Images
-   +
-Transactions
-   +
-OCR
-   +
-Computer Vision
-   +
-Anomaly Detection
-   +
-AI Investigation
-        ↓
-Cross-Evidence Analysis
-        ↓
-Investigation Insights
+- Documents
+- Images
+- Transactions
+- OCR
+- Computer vision
+- Anomaly detection
+- AI investigation
+- Cross-evidence analysis
+- Investigation insights
 
 The goal is to help investigators move from raw evidence to structured findings more efficiently.
-🔍 Core Capabilities
-1. Multimodal Evidence Analysis
-FraudLens AI works with multiple evidence types within the same investigation.
+
+### Multimodal Evidence Analysis
+
+FraudLens AI allows investigators to analyze multiple evidence types within the same investigation.
+
 Supported workflows include:
+
 - Document analysis
 - Image analysis
 - OCR extraction
@@ -103,283 +94,294 @@ Supported workflows include:
 - Visual forensic analysis
 - Cross-evidence comparison
 - AI-assisted investigation
-2. Forensic Image Analysis
-The forensic analysis layer provides multiple visual-analysis techniques, including:
-- DCT quantization analysis
-- Font baseline analysis
-- Perceptual hashing
+
+---
+
+## 🔬 Forensic Image Analysis
+
+The forensic analysis pipeline provides visual-analysis techniques, including:
+
+- Hash consistency
+- Perceptual analysis
 - Edge analysis
 - Contrast analysis
 - Visual anomaly detection
-- Tampering indicators
-These techniques help identify suspicious visual inconsistencies within submitted evidence.
-3. OCR & Evidence Extraction
+- Tamper indicators
+
+The techniques help identify suspicious visual inconsistencies within submitted evidence.
+
+---
+
+## 🔎 OCR & Evidence Extraction
+
 OCR processing extracts information from uploaded evidence and makes it available for downstream investigation.
+
 Extracted information can be compared against:
+
 - Transaction records
 - Claimed invoice values
 - Merchant information
 - Other evidence
-- Investigation context
-4. Cross-Evidence Analysis
-Fraud investigations become more useful when evidence is compared rather than analyzed in isolation.
-FraudLens AI can examine discrepancies such as:
-Invoice Amount
-      │
-      ├──────────────┐
-      ▼              ▼
-Terminal Record   Transaction Data
-      │              │
-      └──────┬───────┘
-             ▼
-       Evidence Fusion
-             │
-             ▼
-       Investigation Finding
+- Investigator findings
 
-Example investigation signals include:
+This allows investigators to identify potential discrepancies across different evidence sources.
+
+---
+
+## 🔗 Cross-Evidence Analysis
+
+Fraud investigations become more useful when evidence is compared rather than analyzed in isolation.
+
+FraudLens AI provides cross-evidence analysis to identify relationships such as:
+
 - Invoice amount vs. transaction amount
-- Evidence inconsistencies
-- Suspicious merchant categories
-- Altered signatures
-- PIN bypass indicators
-- Conflicting evidence fields
-🤖 AI Investigator
-FraudLens AI includes an AI-assisted investigation layer designed to help investigators interpret collected evidence.
-The AI Investigator can assist with:
-- Evidence interpretation
-- Investigation questions
-- Finding summaries
-- Cross-evidence reasoning
-- Forensic explanations
-- Investigation context
-The application integrates the Google Gemini API for AI-powered analysis.
-📊 Investigation Workspace
-The application provides a unified workspace for managing investigations.
-Key areas include:
-Executive Overview
-Provides high-level investigation information and relevant metrics.
-Forensic Viewer
-Provides multiple analysis views including:
-- Normal view
-- Heatmap/tamper overlays
-- OCR bounding boxes
-- Edge analysis
-- Contrast analysis
-Evidence Vault
-Central location for investigation evidence and documents.
-Investigation Workspace
-Allows investigators to work with evidence and compare findings.
-Cross-Evidence Matrix
-Provides a structured view for identifying relationships and inconsistencies across evidence.
-🧠 Machine Learning & Detection
-FraudLens AI combines multiple approaches rather than depending on a single classifier.
-Historical Baselines
-The project preserves:
+- Merchant information vs. transaction records
+- Document information vs. extracted OCR data
+- Evidence metadata vs. investigation context
+- Multiple pieces of evidence supporting the same investigation
+
+Example workflow:
+
+```text
+Terminal Record
+       │
+       ▼
+Transaction Data
+       │
+       ▼
+Cross-Evidence Analysis
+       ▲
+       │
+Invoice / Document
+       │
+       ▼
+OCR Extraction
+```
+
+---
+
+## 🤖 AI Investigator
+
+FraudLens AI includes an AI investigator assistant designed to help investigators interpret evidence and investigation findings.
+
+The assistant can support workflows such as:
+
+- Explaining visual inconsistencies
+- Analyzing merchant and amount divergence
+- Recommending immediate fraud-mitigation steps
+- Drafting investigation summaries
+- Connecting findings across evidence
+- Supporting investigator decision-making
+
+The AI layer uses Google Gemini for investigation-oriented analysis.
+
+---
+
+## 🧠 Machine Learning
+
+The project preserves traditional machine-learning approaches as historical baselines while incorporating production-oriented anomaly detection.
+
+### Historical Baselines
+
 - Decision Tree
 - Support Vector Machine (SVM)
-as historical baseline models.
-Production-Oriented Detection
-The platform also uses:
+
+### Production-Oriented Models
+
 - XGBoost
 - Isolation Forest
-for supervised and unsupervised fraud/anomaly detection workflows.
-🏗️ System Architecture
-                         ┌─────────────────────┐
-                         │        User         │
-                         └──────────┬──────────┘
-                                    │
-                                  HTTPS
-                                    │
-                                    ▼
-                         ┌─────────────────────┐
-                         │  Amazon CloudFront  │
-                         │      CDN / HTTPS    │
-                         └──────────┬──────────┘
-                                    │
-                                    ▼
-                ┌────────────────────────────────────┐
-                │       AWS Elastic Beanstalk         │
-                │                                    │
-                │       Single EC2 + Docker           │
-                │                                    │
-                │  ┌────────────┐  ┌──────────────┐ │
-                │  │ React/Vite │  │ Node/Express │ │
-                │  │ Frontend   │  │ API Backend  │ │
-                │  └────────────┘  └───────┬──────┘ │
-                └──────────────────────────┼─────────┘
-                                           │
-                         ┌─────────────────┼─────────────────┐
-                         │                 │                 │
-                         ▼                 ▼                 ▼
-                 ┌─────────────┐   ┌─────────────┐  ┌──────────────┐
-                 │ MongoDB     │   │ Gemini API  │  │ Forensic     │
-                 │ Atlas       │   │             │  │ Analysis     │
-                 │             │   │ AI          │  │ OCR / CV     │
-                 └─────────────┘   └─────────────┘  └──────────────┘
 
-☁️ AWS Deployment Architecture
-FraudLens AI is deployed as a containerized application on AWS.
-                         Kiro
-                          │
-                          ▼
-                    Amazon ECR
-                          │
-                     Docker Image
-                          │
-                          ▼
-              Elastic Beanstalk
-                          │
-                          ▼
-                   EC2 Instance
-                    + Docker
-                          │
-                          ▼
-                  Amazon CloudFront
-                          │
-                          ▼
-                     Public HTTPS
-                          │
-                          ▼
-                       Users
+Isolation Forest is used for unsupervised anomaly detection where suspicious transaction patterns can be identified without requiring every example to be explicitly labelled.
 
-AWS Services Used
-AWS Service	Purpose
-Amazon CloudFront	Public HTTPS endpoint and content delivery
-Elastic Beanstalk	Application deployment and environment management
-Amazon EC2	Compute layer running the Docker application
-Amazon ECR	Container image registry
-Amazon S3	Elastic Beanstalk deployment/application artifacts
-AWS Systems Manager Parameter Store	Secure runtime secrets
-IAM	AWS resource permissions and deployment access
+---
 
+## 🏗️ Architecture
 
-🔐 Security & Secrets
-Production secrets are not committed to the Git repository.
-AWS Systems Manager Parameter Store is used for sensitive runtime configuration.
+FraudLens AI uses a unified application architecture with a React/Vite frontend and Node.js/Express backend.
+
+```text
+                         ┌──────────────────────────┐
+                         │          User            │
+                         └────────────┬─────────────┘
+                                      │
+                                      ▼
+                         ┌──────────────────────────┐
+                         │     Amazon CloudFront     │
+                         │          HTTPS            │
+                         └────────────┬─────────────┘
+                                      │
+                                      ▼
+                  ┌──────────────────────────────────────┐
+                  │       Elastic Beanstalk               │
+                  │       Single Docker Instance          │
+                  │                                      │
+                  │   ┌──────────────────────────────┐   │
+                  │   │     Node.js / Express        │   │
+                  │   │                              │   │
+                  │   │ React/Vite Frontend          │   │
+                  │   │ REST API                     │   │
+                  │   │ Investigation Engine         │   │
+                  │   │ OCR Processing                │   │
+                  │   │ Evidence Analysis             │   │
+                  │   └──────────────┬───────────────┘   │
+                  └──────────────────┼───────────────────┘
+                                     │
+                    ┌────────────────┼────────────────┐
+                    │                │                │
+                    ▼                ▼                ▼
+             MongoDB Atlas       Gemini API       AWS SSM
+             Database            AI Analysis       Secrets
+```
+
+---
+
+## ☁️ AWS Infrastructure
+
+The production deployment uses AWS services including:
+
+- Amazon CloudFront
+- Amazon S3
+- Amazon Elastic Beanstalk
+- Amazon EC2
+- Amazon ECR
+- AWS Systems Manager Parameter Store
+- AWS IAM
+
+### Amazon CloudFront
+
+CloudFront provides the public HTTPS endpoint for the application.
+
+**Live URL:**
+
+https://d21zw6n2b48e0s.cloudfront.net
+
+### Amazon S3
+
+Amazon S3 is used as part of the deployment workflow for application artifacts and Elastic Beanstalk application versions.
+
+### Amazon ECR
+
+Amazon Elastic Container Registry stores the Docker container image used by the production deployment.
+
+### Elastic Beanstalk
+
+Elastic Beanstalk runs the production Docker application on a single EC2 instance.
+
+### AWS Systems Manager Parameter Store
+
+Sensitive runtime configuration is stored as encrypted SSM parameters.
+
 Stored parameters include:
-/fraudlens-ai/GEMINI_API_KEY
-/fraudlens-ai/MONGODB_URI
-/fraudlens-ai/JWT_SECRET
 
-The parameters are stored as:
-SecureString
+- `GEMINI_API_KEY`
+- `MONGODB_URI`
+- `JWT_SECRET`
 
-This keeps sensitive credentials outside the source repository.
-🐳 Containerized Deployment
-FraudLens AI is packaged as a Docker application.
-The production container contains the unified application:
-React/Vite Frontend
-        +
-Node.js/Express Backend
-        +
-API Routes
-        +
-Forensic Application Logic
+Secrets are not committed to the Git repository.
 
-The container image is stored in Amazon ECR and deployed through Elastic Beanstalk.
-🧑‍💻 Kiro-Assisted Development
-Kiro was used throughout the development and deployment workflow.
-The coding-agent workflow included:
-Requirements
-     │
-     ▼
-Codebase Analysis
-     │
-     ▼
-Architecture Planning
-     │
-     ▼
-Implementation
-     │
-     ▼
-Debugging
-     │
-     ▼
-Dockerization
-     │
-     ▼
-AWS Integration
-     │
-     ▼
-ECR Deployment
-     │
-     ▼
-Elastic Beanstalk
-     │
-     ▼
-CloudFront
-     │
-     ▼
-Live Application
+### IAM
 
-Kiro assisted with tasks including:
-- Project architecture analysis
-- Application changes
-- AWS CLI workflows
-- Docker configuration
-- ECR deployment
-- Elastic Beanstalk deployment
-- CloudFront configuration
-- Environment configuration
-- Deployment troubleshooting
-- Production verification
-The development process demonstrates an agent-assisted workflow from an existing application to a publicly deployed AWS application.
-🧪 Production Verification
-The deployed application was verified through the production CloudFront endpoint.
-Health endpoint:
-/api/v1/health
+IAM roles provide the AWS permissions required for the deployment infrastructure, including access to:
 
-The production health response confirmed:
-API: ONLINE
-MongoDB: CONNECTED
-Gemini AI: ONLINE
-Forensics Analyzer: ONLINE
-CV Engine: READY
-OCR Service: CONNECTED
-AI Investigator: ONLINE
+- Amazon ECR
+- AWS Systems Manager Parameter Store
+- Elastic Beanstalk
+- EC2
 
-Production version:
-3.0.0-forensics-production
+---
 
-🛠️ Technology Stack
-Frontend
+## 🗄️ Database
+
+FraudLens AI uses **MongoDB Atlas** as the primary database.
+
+The application stores investigation-related information such as:
+
+- Investigations
+- Evidence
+- Transactions
+- Analysis results
+- Investigation history
+
+---
+
+## 🔐 Authentication
+
+The application uses **Firebase Authentication** for user authentication.
+
+Supported authentication flows include:
+
+- Google authentication
+- Email/password authentication
+- Demo investigator access
+
+The production application requires the deployed CloudFront domain to be configured as an authorized Firebase authentication domain.
+
+---
+
+## 🛡️ Security
+
+Security considerations implemented in the deployment include:
+
+- Secrets stored outside source code
+- SSM SecureString parameters
+- IAM-based AWS permissions
+- Docker-based deployment
+- HTTPS through CloudFront
+- Firebase authentication
+- Environment-based configuration
+- `.env` files excluded from version control
+
+---
+
+## 🧰 Technology Stack
+
+### Frontend
+
 - React
-- Vite
 - TypeScript
+- Vite
 - Tailwind CSS
-- Framer Motion
-- Recharts
-Backend
+
+### Backend
+
 - Node.js
 - Express
 - TypeScript
-AI / ML
-- Google Gemini API
+
+### AI / ML
+
+- Google Gemini
 - XGBoost
 - Isolation Forest
 - Decision Tree
 - SVM
 - Computer Vision
 - OCR
-- Multimodal analysis
-Database
+
+### Database
+
 - MongoDB Atlas
-Authentication
+
+### Authentication
+
 - Firebase Authentication
-- Google OAuth
-- Email/password authentication
-Infrastructure
-- Docker
-- Amazon ECR
-- Amazon Elastic Beanstalk
+
+### Cloud / DevOps
+
+- AWS CloudFront
+- AWS S3
+- AWS Elastic Beanstalk
 - Amazon EC2
-- Amazon S3
-- Amazon CloudFront
-- AWS Systems Manager Parameter Store
+- Amazon ECR
 - AWS IAM
-📁 Project Architecture
-A simplified view of the project:
+- AWS Systems Manager Parameter Store
+- Docker
+
+---
+
+## 📁 Project Structure
+
+```text
 fraudlens-ai/
 │
 ├── src/
@@ -388,65 +390,37 @@ fraudlens-ai/
 │   ├── lib/
 │   └── ...
 │
-├── server/
-│   ├── routes/
-│   ├── services/
-│   └── ...
-│
 ├── backend/
-│   └── ML / research code
+│   ├── models/
+│   ├── notebooks/
+│   └── ...
 │
 ├── public/
 │
+├── server.ts
 ├── Dockerfile
+├── docker-compose.yml
 ├── package.json
-├── vite.config.*
+├── vite.config.ts
 ├── tsconfig.json
-├── .env.example
+├── .gitignore
 └── README.md
+```
 
-The Python backend/ directory contains research and machine-learning code. The production web application currently runs through the Node.js/Express application.
+---
 
-⚙️ Local Development
-Prerequisites
-Install:
-- Node.js
-- npm
-- Docker
-- MongoDB Atlas account
-- Google Gemini API key
-- Firebase project
-Install Dependencies
-npm install
+## 🚀 Deployment
 
-Environment Variables
-Create a local .env file.
-Example:
-GEMINI_API_KEY=your_gemini_api_key
-MONGODB_URI=your_mongodb_connection_string
-JWT_SECRET=your_jwt_secret
-NODE_ENV=development
+The production deployment follows this workflow:
 
-Firebase client configuration is provided through the application's frontend environment configuration.
-Run Development Server
-npm run dev
-
-🐳 Docker
-Build the application:
-docker build -t fraudlens-ai .
-
-Run locally:
-docker run -p 3000:3000 fraudlens-ai
-
-Then open:
-http://localhost:3000
-
-🚀 Production Deployment
-The production deployment follows:
-Source Code
+```text
+Development
      │
      ▼
-Docker Build
+React + Node.js Application
+     │
+     ▼
+Docker Image
      │
      ▼
 Amazon ECR
@@ -455,74 +429,85 @@ Amazon ECR
 Elastic Beanstalk
      │
      ▼
-EC2
+EC2 Instance
      │
      ▼
+Amazon CloudFront
+     │
+     ▼
+Public HTTPS Application
+```
+
+---
+
+## 🤖 AI-Assisted Development
+
+FraudLens AI was developed using an AI-assisted engineering workflow.
+
+The project used **Kiro** as a coding agent together with AWS tooling to assist with:
+
+- Architecture planning
+- Code implementation
+- Debugging
+- AWS configuration
+- Docker deployment
+- Infrastructure setup
+- Deployment troubleshooting
+- Production verification
+
+The development process included iterative debugging and deployment validation rather than only local development.
+
+---
+
+## 🧪 Production Verification
+
+The deployed application was verified through the complete production path:
+
+```text
+Browser
+   ↓
 CloudFront
-     │
-     ▼
-HTTPS Application
+   ↓
+Elastic Beanstalk
+   ↓
+Node.js / Express
+   ↓
+MongoDB Atlas
+   ↓
+Gemini API
+```
 
-Runtime secrets are supplied through AWS Systems Manager Parameter Store rather than committed to source control.
-🔎 Why FraudLens AI?
-Traditional fraud analysis can require investigators to manually examine multiple evidence sources.
-FraudLens AI focuses on bringing those sources together into a single workflow:
-Collect Evidence
-      ↓
-Extract Information
-      ↓
-Analyze Visual Evidence
-      ↓
-Analyze Transactions
-      ↓
-Detect Anomalies
-      ↓
-Compare Evidence
-      ↓
-AI-Assisted Investigation
-      ↓
-Investigation Findings
+The production health endpoint reported:
 
-This makes the project more than a single fraud-classification model: it is a multimodal investigation platform.
-🎯 Project Direction
-Future development can extend FraudLens AI with:
-- More advanced multimodal models
-- Additional forensic detection techniques
-- Automated investigation reports
-- Larger evidence repositories
-- Advanced anomaly detection
-- Investigator collaboration
-- More cloud-native processing
-- Expanded MLOps workflows
-🌐 Links
-Live Application
+- API: ONLINE
+- MongoDB: CONNECTED
+- Gemini AI: ONLINE
+- Forensics Analyzer: ONLINE
+- CV Engine: READY
+- OCR Service: CONNECTED
+
+---
+
+## 📌 Project Status
+
+### Production Deployment — Live on AWS
+
+FraudLens AI is publicly accessible through Amazon CloudFront and uses AWS infrastructure for its production deployment.
+
+**Live Application:**
+
 https://d21zw6n2b48e0s.cloudfront.net
-Repository
-https://github.com/pathananas2007/fraudlens-ai
-🏆 AWS Zero to Shipped
-FraudLens AI was developed and deployed as part of the AWS Zero to Shipped Hackathon.
-The project demonstrates the complete journey:
-IDEA
- ↓
-BUILD
- ↓
-AI-ASSISTED DEVELOPMENT
- ↓
-CONTAINERIZATION
- ↓
-AWS DEPLOYMENT
- ↓
-CLOUDFRONT HTTPS
- ↓
-LIVE APPLICATION
 
-The project focuses on demonstrating how an AI-assisted development workflow can take a multimodal fraud investigation application from development to a publicly accessible production deployment.
-📄 License
+---
+
+## 🎯 Project Goal
+
+The goal of FraudLens AI is to help investigators move from raw evidence to structured findings more efficiently.
+
+The platform combines multimodal evidence processing, forensic analysis, anomaly detection, cross-evidence comparison, and AI-assisted investigation into a unified workflow.
+
+---
+
+## 📄 License
+
 This project is provided for educational, research, and demonstration purposes.
-FraudLens AI
-Multimodal Financial Evidence Forensics
-Built with React, Node.js, Machine Learning, Computer Vision, Gemini, MongoDB, Docker, and AWS.
-
-**One correction before you paste it:** the README currently describes S3 as part of the **Elastic Beanstalk deployment/application-artifact path**, not as an evidence-storage system. That's intentional—we shouldn't claim S3 is storing fraud documents unless the code actually does that.
-
-Also, I kept the Python `backend/` distinction because your earlier architecture analysis established that it isn't currently wired into the running Node/Express production server.
