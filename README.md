@@ -114,7 +114,7 @@ FraudLens AI is designed around this investigation problem.
 
 ## The Solution
 
-FraudLens AI combines multiple analytical layers into one workflow.
+FraudLens AI combines multiple analytical layers into one workflow. 
 
 ```mermaid
 flowchart TD
@@ -141,7 +141,7 @@ The platform focuses on **investigation support**, rather than simply producing 
 
 ## Core Concept
 
-FraudLens AI follows a simple principle:
+FraudLens AI follows a simple principles:
 
 > **A fraud signal becomes more useful when it can be connected to supporting evidence.**
 
@@ -185,7 +185,7 @@ flowchart TD
 
 ---
 
-## Investigation Workflow
+## Investigation Workflow Given
 
 ### 1. Create an Investigation
 
