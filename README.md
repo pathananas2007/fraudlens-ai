@@ -564,7 +564,7 @@ flowchart TD
 
 The project is not limited to a single machine learning notebook. It combines:
 
-> Frontend · Backend · Database · Authentication · Machine Learning · Computer Vision · OCR · Generative AI · Docker · Cloud Infrastructure · Production Deployment
+> Frontend · Backend · Database · Authentication · Machine Learning .Neural Network· Computer Vision · OCR · Generative AI · Docker · Cloud Infrastructure · Production Deployment
 
 This demonstrates the complete lifecycle from model experimentation to an accessible application.
 
